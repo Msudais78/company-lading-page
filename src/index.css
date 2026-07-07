@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #000000;
+  --color-brand-secondary: #000000;
+  
+  --color-surface: #ffffff;
+  --color-surface-muted: #ffffff;
+  --color-surface-border: #000000;
+  
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-black font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white border-b border-black;
+  }
+  
+  .text-gradient {
+    @apply text-black;
+  }
+}
