@@ -4,7 +4,7 @@ import Reveal from './Reveal';
 const teamMembers = [
   { name: 'Muhammad Waqas', role: 'CEO • 5 Yrs PHP/Laravel Dev', img: '/team/waqas.jpg' },
   { name: 'Muhammad Sudais', role: 'Full Stack Developer', img: '/team/sudais.jpg' },
-  { name: 'Mian Shoaib', role: 'Front End Developer', img: '/team/shoaib.jpg' },
+  { name: 'Mian Sohaib', role: 'Front End Developer', img: '/team/shoaib.jpg' },
   { name: 'Haroon', role: 'Video Editor', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400&h=400' },
   { name: 'Abdul Haseeb', role: 'Backend Engineer', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400&h=400' }
 ];

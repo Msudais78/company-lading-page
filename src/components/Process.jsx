@@ -83,15 +83,17 @@ export default function Process() {
 
           {/* Active Content Panel */}
           <div className="mt-16 p-12 border border-primary-border-muted bg-primary-card min-h-[200px] flex items-center">
-            <div 
-              key={activeStep} // force re-render for animation
-              className="animate-[wordReveal_0.5s_ease-out_forwards]"
-            >
-              <h4 className="text-3xl font-bold text-primary-text mb-6">0{activeStep + 1}. {steps[activeStep].title}</h4>
-              <p className="text-primary-muted text-xl leading-relaxed max-w-4xl">
-                {steps[activeStep].description}
-              </p>
-            </div>
+            {steps[activeStep] && (
+              <div 
+                key={activeStep} // force re-render for animation
+                className="animate-[wordReveal_0.5s_ease-out_forwards]"
+              >
+                <h4 className="text-3xl font-bold text-primary-text mb-6">0{activeStep + 1}. {steps[activeStep].title}</h4>
+                <p className="text-primary-muted text-xl leading-relaxed max-w-4xl">
+                  {steps[activeStep].description}
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
