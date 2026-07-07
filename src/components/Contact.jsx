@@ -1,70 +1,57 @@
+import React from 'react';
+import Reveal from './Reveal';
+
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 relative bg-white border-b-8 border-black">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black mb-4 text-black uppercase tracking-tight">Get in Touch</h2>
-          <p className="text-black text-xl max-w-2xl mx-auto font-medium">
-            Ready to architect your next big digital solution? Drop us a message below.
-          </p>
-        </div>
+    <section id="contact" className="py-24 lg:py-32 bg-primary-bg border-b border-primary-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="bg-white p-8 md:p-12 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
-          <form 
-            action="https://formsubmit.co/sudais.datasceince@gmail.com" 
-            method="POST"
-            className="space-y-6"
-          >
-            {/* Optional FormSubmit configuration */}
-            <input type="hidden" name="_subject" value="New Contact Form Submission - BraxSystems" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_template" value="box" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          
+          {/* Left Side: Title and Contact Cards */}
+          <div className="space-y-12">
+            <Reveal direction="up">
+              <h2 className="text-5xl md:text-7xl font-bold text-primary-text tracking-tighter">
+                Get In Touch
+              </h2>
+            </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col">
-                <label htmlFor="name" className="text-black font-bold uppercase tracking-wider mb-2">Name</label>
-                <input 
-                  type="text" 
-                  name="name" 
-                  id="name" 
-                  required 
-                  className="bg-white border-4 border-black px-4 py-3 text-black font-bold focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300"
-                  placeholder="JOHN DOE"
-                />
-              </div>
-              
-              <div className="flex flex-col">
-                <label htmlFor="email" className="text-black font-bold uppercase tracking-wider mb-2">Email</label>
-                <input 
-                  type="email" 
-                  name="email" 
-                  id="email" 
-                  required 
-                  className="bg-white border-4 border-black px-4 py-3 text-black font-bold focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300"
-                  placeholder="JOHN@EXAMPLE.COM"
-                />
-              </div>
+            <div className="space-y-6">
+              <Reveal direction="up" delay={100}>
+                <div className="bg-primary-card p-8 md:p-12 rounded-sm border border-primary-border-muted transition-colors duration-300 hover:border-primary-border-hover group">
+                  <h3 className="text-sm font-bold uppercase tracking-widest text-primary-faint mb-4">Phone Number</h3>
+                  <a href="tel:+923159300600" className="text-2xl md:text-3xl text-primary-text font-medium group-hover:underline">
+                    +92 315 9300600
+                  </a>
+                </div>
+              </Reveal>
+
+              <Reveal direction="up" delay={200}>
+                <div className="bg-primary-card p-8 md:p-12 rounded-sm border border-primary-border-muted transition-colors duration-300 hover:border-primary-border-hover group">
+                  <h3 className="text-sm font-bold uppercase tracking-widest text-primary-faint mb-4">Email</h3>
+                  <a href="mailto:info.braxsystems@gmail.com" className="text-2xl md:text-3xl text-primary-text font-medium group-hover:underline break-all">
+                    info.braxsystems@gmail.com
+                  </a>
+                </div>
+              </Reveal>
             </div>
+          </div>
 
-            <div className="flex flex-col">
-              <label htmlFor="message" className="text-black font-bold uppercase tracking-wider mb-2">Message</label>
-              <textarea 
-                name="message" 
-                id="message" 
-                rows="6" 
-                required 
-                className="bg-white border-4 border-black px-4 py-3 text-black font-bold focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 resize-none"
-                placeholder="HOW CAN WE HELP YOU?"
-              ></textarea>
-            </div>
+          {/* Right Side: Map */}
+          <div className="w-full h-[500px] lg:h-[600px] rounded-sm overflow-hidden border border-primary-border-muted relative bg-primary-card">
+            <Reveal direction="left" className="w-full h-full">
+              <iframe 
+                src="https://maps.google.com/maps?q=braxsystems,+ZU+Business+Center,+Abdul+khel,+Chamkani,+Pakistan&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }}
+                allowFullScreen="" 
+                loading="lazy" 
+                className="transition-all duration-700 absolute inset-0"
+              ></iframe>
+            </Reveal>
+          </div>
 
-            <button 
-              type="submit" 
-              className="w-full bg-black text-white px-8 py-5 font-black text-xl border-4 border-black uppercase tracking-widest transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:bg-white hover:text-black active:translate-y-0 active:shadow-none"
-            >
-              Send Message
-            </button>
-          </form>
         </div>
       </div>
     </section>

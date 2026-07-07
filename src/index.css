@@ -1,28 +1,168 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-primary: #000000;
-  --color-brand-secondary: #000000;
-  
-  --color-surface: #ffffff;
-  --color-surface-muted: #ffffff;
-  --color-surface-border: #000000;
-  
   --font-sans: "Inter", system-ui, sans-serif;
+  
+  /* Map semantic CSS variables to Tailwind colors */
+  --color-primary-bg: var(--bg);
+  --color-primary-card: var(--card);
+  --color-primary-card-hover: var(--card-hover);
+  --color-primary-text: var(--text);
+  --color-primary-muted: var(--text-muted);
+  --color-primary-faint: var(--text-faint);
+  --color-primary-border: var(--border);
+  --color-primary-border-muted: var(--border-muted);
+  --color-primary-border-hover: var(--border-hover);
 }
 
 @layer base {
+  :root {
+    --bg: #ffffff;
+    --card: #f4f4f5; /* zinc-100 */
+    --card-hover: #e4e4e7; /* zinc-200 */
+    --text: #000000;
+    --text-muted: #52525b; /* zinc-600 */
+    --text-faint: #71717a; /* zinc-500 */
+    --border: #d4d4d8; /* zinc-300 */
+    --border-muted: #e4e4e7; /* zinc-200 */
+    --border-hover: #a1a1aa; /* zinc-400 */
+    --invert-val: 1;
+    --service-rotation: 0deg;
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+  }
+
+  .dark {
+    --bg: #000000;
+    --card: #09090b; /* zinc-950 */
+    --card-hover: #18181b; /* zinc-900 */
+    --text: #ffffff;
+    --text-muted: #a1a1aa; /* zinc-400 */
+    --text-faint: #71717a; /* zinc-500 */
+    --border: #18181b; /* zinc-900 */
+    --border-muted: #27272a; /* zinc-800 */
+    --border-hover: #52525b; /* zinc-600 */
+    --invert-val: 0;
+  }
+
   body {
-    @apply bg-white text-black font-sans antialiased;
+    @apply bg-primary-bg text-primary-text font-sans antialiased overflow-x-hidden selection:bg-primary-text selection:text-primary-bg transition-colors duration-300;
+  }
+  
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary-text ring-offset-2 ring-offset-primary-bg;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white border-b border-black;
+    @apply bg-black/80 backdrop-blur-md border-b border-zinc-800;
   }
   
   .text-gradient {
-    @apply text-black;
+    @apply text-white;
+  }
+
+  /* Custom PRD Animations */
+  @keyframes wordReveal {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .word {
+    display: inline-block;
+    opacity: 0;
+    animation: wordReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .ticker-track {
+    display: flex;
+    animation: ticker 30s linear infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Services Tilt Grid Utilities */
+  @keyframes cardEnter {
+    from {
+      opacity: 0;
+      transform: translateY(40px) rotate(calc(var(--service-rotation) * 3));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) rotate(var(--service-rotation));
+    }
+  }
+
+  @keyframes numberPulse {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.3; }
+  }
+
+  .service-number {
+    animation: numberPulse 4s ease-in-out infinite;
+  }
+
+  .service-card-hover-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(0, 0, 0, 0.15),
+      transparent 60%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .dark .service-card-hover-border::before {
+    background: radial-gradient(
+      300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255, 255, 255, 0.25),
+      transparent 60%
+    );
+  }
+
+  .service-card:hover .service-card-hover-border::before {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion) {
+    .service-card {
+      transform: none !important;
+      transition: none !important;
+    }
+    .service-number {
+      animation: none !important;
+      opacity: 0.3;
+    }
   }
 }
