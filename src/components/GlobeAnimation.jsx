@@ -141,10 +141,25 @@ export default function GlobeAnimation() {
 
     const handleResize = () => {
       if (!container) return;
-      camera.aspect = container.clientWidth / container.clientHeight;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setSize(width, height);
+      
+      // Responsive scaling: if the aspect ratio is narrow (mobile), scale down the globe
+      // so it doesn't get cut off on the left and right edges.
+      const aspect = width / height;
+      if (aspect < 1) {
+        const scale = Math.max(0.5, aspect * 1.1); // Dynamic scale for mobile
+        globeGroup.scale.set(scale, scale, scale);
+      } else {
+        globeGroup.scale.set(1, 1, 1);
+      }
     };
+    
+    // Call once to ensure proper initial scale
+    handleResize();
     
     window.addEventListener('resize', handleResize);
 

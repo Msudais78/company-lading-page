@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -10,7 +9,6 @@ import CaseStudy from './pages/CaseStudy';
 function App() {
   return (
     <div className="bg-primary-bg text-primary-text selection:bg-primary-text selection:text-primary-bg transition-colors duration-300">
-      <CustomCursor />
       <ScrollToTop />
       <Navbar />
       <Routes>
