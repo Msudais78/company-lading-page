@@ -1,152 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Reveal from './Reveal';
-
-const services = [
-  {
-    num: '01',
-    title: 'Web Development',
-    description: 'High-performance web apps engineered for scale.',
-    expandedDescription: 'High-performance web applications engineered for scale. We build with modern frameworks that deliver sub-second load times and seamless user experiences across every device.',
-    capabilities: ['Single Page Apps', 'Progressive Web Apps', 'Server-Side Rendering', 'Performance Optimization'],
-    tech: 'Next.js · React · TypeScript · Node.js',
-    span: 'lg:col-span-2 col-span-1',
-    rotation: '-1.5deg',
-    tier: 1
-  },
-  {
-    num: '02',
-    title: 'App Development',
-    description: 'Cross-platform mobile experiences that feel native.',
-    expandedDescription: 'Cross-platform mobile experiences that feel native. From concept to App Store, we build applications your users will love to open every day.',
-    capabilities: ['iOS Native', 'Android Native', 'Cross-Platform', 'App Store Optimization'],
-    tech: 'React Native · Flutter · Swift · Kotlin',
-    span: 'col-span-1',
-    rotation: '1.2deg',
-    tier: 2
-  },
-  {
-    num: '03',
-    title: 'UI/UX Design',
-    description: 'Research-driven design that converts.',
-    expandedDescription: 'Interfaces that are intuitive before they\'re beautiful — and beautiful because they\'re intuitive. Research-driven design that converts.',
-    capabilities: ['User Research', 'Wireframing', 'Prototyping', 'Design Systems'],
-    tech: 'Figma · Framer · Principle',
-    span: 'col-span-1',
-    rotation: '-0.8deg',
-    tier: 2
-  },
-  {
-    num: '04',
-    title: 'Cloud Solutions',
-    description: 'Infrastructure that scales with your ambition.',
-    expandedDescription: 'Infrastructure that scales with your ambition. We architect cloud environments that are resilient, cost-efficient, and built for growth.',
-    capabilities: ['Cloud Migration', 'Auto-Scaling', 'Serverless Architecture', 'Cost Optimization'],
-    tech: 'AWS · GCP · Azure · Terraform',
-    span: 'col-span-1',
-    rotation: '2deg',
-    tier: 2
-  },
-  {
-    num: '05',
-    title: 'DevOps & CI/CD',
-    description: 'Deployment pipelines that make shipping feel effortless.',
-    expandedDescription: 'Deployment pipelines that make shipping feel effortless. Automated testing, staging environments, and zero-downtime releases.',
-    capabilities: ['Pipeline Automation', 'Container Orchestration', 'Monitoring & Alerting', 'Infrastructure as Code'],
-    tech: 'Docker · Kubernetes · GitHub Actions · Jenkins',
-    span: 'lg:col-span-2 col-span-1',
-    rotation: '-1deg',
-    tier: 1
-  },
-  {
-    num: '06',
-    title: 'API Development',
-    description: 'The connective tissue between your systems.',
-    expandedDescription: 'The connective tissue between your systems. RESTful and GraphQL APIs designed for performance, security, and developer experience.',
-    capabilities: ['REST APIs', 'GraphQL', 'API Gateway', 'Webhook Systems'],
-    tech: 'Node.js · Python · GraphQL · PostgREST',
-    span: 'col-span-1',
-    rotation: '1.5deg',
-    tier: 3
-  },
-  {
-    num: '07',
-    title: 'E-Commerce Solutions',
-    description: 'Digital storefronts that sell and delight.',
-    expandedDescription: 'Digital storefronts that sell. From product discovery to checkout, every interaction is optimized for conversion and delight.',
-    capabilities: ['Custom Stores', 'Payment Integration', 'Inventory Systems', 'Analytics'],
-    tech: 'Shopify · Headless Commerce · Stripe · PayPal',
-    span: 'col-span-1',
-    rotation: '-2deg',
-    tier: 3
-  },
-  {
-    num: '08',
-    title: 'Consulting & Strategy',
-    description: 'Technical strategy that aligns with business goals.',
-    expandedDescription: 'Technical strategy that aligns with business goals. We help you make the right decisions before writing a single line of code.',
-    capabilities: ['Tech Audits', 'Architecture Planning', 'Team Augmentation', 'Roadmap Design'],
-    tech: '—',
-    span: 'col-span-1',
-    rotation: '0.5deg',
-    tier: 2
-  },
-  {
-    num: '09',
-    title: 'Data Analytics & BI',
-    description: 'Transform raw data into actionable business intelligence.',
-    expandedDescription: 'Transform raw data into actionable business intelligence. We build custom dashboards, predictive models, and data pipelines to help you make smarter decisions.',
-    capabilities: ['Data Warehousing', 'Custom Dashboards', 'Predictive Modeling', 'Data Visualization'],
-    tech: 'Python · SQL · PowerBI · Snowflake',
-    span: 'col-span-1',
-    rotation: '1.8deg',
-    tier: 2
-  },
-  {
-    num: '10',
-    title: 'Digital Marketing',
-    description: 'Data-driven campaigns that maximize ROI and visibility.',
-    expandedDescription: 'Data-driven campaigns that maximize ROI and brand visibility. We combine creative strategy with rigorous analytics to scale your customer acquisition channels.',
-    capabilities: ['SEO / SEM', 'Performance Marketing', 'Conversion Optimization', 'Content Strategy'],
-    tech: 'Google Analytics · HubSpot · Ahrefs',
-    span: 'col-span-1',
-    rotation: '-1.2deg',
-    tier: 2
-  },
-  {
-    num: '11',
-    title: 'Artificial Intelligence',
-    description: 'Integrate intelligent automation and LLMs into your workflow.',
-    expandedDescription: 'Integrate intelligent automation and LLMs into your workflow. We build custom AI solutions that drastically reduce operational overhead and unlock new capabilities.',
-    capabilities: ['LLM Integration', 'Computer Vision', 'NLP Pipelines', 'Predictive AI'],
-    tech: 'OpenAI · PyTorch · TensorFlow · LangChain',
-    span: 'lg:col-span-2 col-span-1',
-    rotation: '0.8deg',
-    tier: 1
-  },
-  {
-    num: '12',
-    title: 'Cybersecurity',
-    description: 'Enterprise-grade security audits and threat mitigation.',
-    expandedDescription: 'Enterprise-grade security audits and threat mitigation. We fortify your infrastructure against modern vulnerabilities to ensure your data stays locked down.',
-    capabilities: ['Penetration Testing', 'Security Audits', 'Compliance', 'Threat Monitoring'],
-    tech: 'Kali Linux · Wireshark · Metasploit',
-    span: 'col-span-1',
-    rotation: '-2.1deg',
-    tier: 3
-  },
-  {
-    num: '13',
-    title: 'Blockchain Solutions',
-    description: 'Decentralized applications and smart contract development.',
-    expandedDescription: 'Decentralized applications and smart contract development. We leverage blockchain technology to build transparent, secure, and immutable systems.',
-    capabilities: ['Smart Contracts', 'Web3 DApps', 'Tokenization', 'DeFi Protocols'],
-    tech: 'Solidity · Rust · Web3.js · Ethereum',
-    span: 'col-span-1',
-    rotation: '1.4deg',
-    tier: 3
-  }
-];
+import { services } from '../data/services';
 
 function ServiceCard({ service, index, expandedId, setExpandedId }) {
   const cardRef = useRef(null);
@@ -308,9 +164,14 @@ function ServiceCard({ service, index, expandedId, setExpandedId }) {
             Tech: {service.tech}
           </div>
           
-          <a href="#projects" onClick={(e) => e.stopPropagation()} className="inline-flex items-center border border-primary-border-muted px-4 py-2 text-primary-text text-sm font-bold uppercase tracking-widest hover:bg-primary-text hover:text-primary-bg transition-colors">
-            Explore Projects <ArrowRight className="w-4 h-4 ml-2" />
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link to={`/service/${service.id}`} onClick={(e) => e.stopPropagation()} className="inline-flex items-center justify-center border border-primary-border-muted bg-primary-text text-primary-bg px-6 py-3 text-sm font-bold uppercase tracking-widest hover:opacity-80 transition-opacity">
+              View Full Details <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+            <a href="#projects" onClick={(e) => e.stopPropagation()} className="inline-flex items-center justify-center border border-primary-border-muted px-6 py-3 text-primary-text text-sm font-bold uppercase tracking-widest hover:bg-zinc-100 transition-colors">
+              Explore Projects
+            </a>
+          </div>
         </div>
       </div>
       

@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import CaseStudy from './pages/CaseStudy';
+import ServiceDetail from './pages/ServiceDetail';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/project/:id" element={<CaseStudy />} />
+        <Route path="/service/:id" element={<ServiceDetail />} />
       </Routes>
       <Footer />
     </div>

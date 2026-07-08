@@ -16,9 +16,9 @@ export const projects = [
       { label: 'Uptime', value: '99.999%' }
     ],
     gallery: [
-      'https://picsum.photos/seed/fintech1/1200/800',
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1640340434855-6084b1f4901c?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1590283603385-18ff38540843?auto=format&fit=crop&q=80&w=1200'
+      'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=1200'
     ]
   },
   {
@@ -38,7 +38,7 @@ export const projects = [
       { label: 'App Store Rating', value: '4.9' }
     ],
     gallery: [
-      'https://picsum.photos/seed/health1/1200/800',
+      'https://images.unsplash.com/photo-1576091160550-2173ff9e5e3c?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1200'
     ]
@@ -60,7 +60,7 @@ export const projects = [
       { label: 'Load Time', value: '0.6s' }
     ],
     gallery: [
-      'https://picsum.photos/seed/commerce1/1200/800',
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&q=80&w=1200'
     ]

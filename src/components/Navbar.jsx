@@ -1,12 +1,28 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, Sun, Moon } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    setIsOpen(false);
+    
+    if (location.pathname !== '/') {
+      navigate('/' + href);
+      setTimeout(() => {
+        const element = document.getElementById(href.substring(1));
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const element = document.getElementById(href.substring(1));
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +58,8 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <a 
                 key={link.name}
-                href={link.href} 
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="text-primary-muted hover:text-primary-text transition-colors text-sm font-medium uppercase tracking-widest"
               >
                 {link.name}
@@ -50,17 +67,11 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* CTA Desktop and Theme Toggle */}
+          {/* CTA Desktop */}
           <div className="hidden lg:flex items-center gap-4">
-            <button 
-              onClick={toggleTheme}
-              className="p-2 text-primary-text hover:bg-primary-border-muted rounded-full transition-colors"
-              aria-label="Toggle Theme"
-            >
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
             <a 
               href="#contact" 
+              onClick={(e) => handleNavClick(e, '#contact')}
               className="border border-primary-text text-primary-text px-6 py-2 text-sm font-bold uppercase tracking-widest hover:bg-primary-text hover:text-primary-bg transition-all duration-300 ease-in-out"
             >
               Start a Project
@@ -69,13 +80,6 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-4">
-            <button 
-              onClick={toggleTheme}
-              className="p-2 text-primary-text"
-              aria-label="Toggle Theme"
-            >
-              {theme === 'dark' ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
-            </button>
             <button onClick={() => setIsOpen(!isOpen)} className="text-primary-text p-2">
               {isOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
             </button>
@@ -95,7 +99,7 @@ export default function Navbar() {
             <a 
               key={link.name}
               href={link.href} 
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="text-3xl font-black text-primary-muted hover:text-primary-text uppercase tracking-widest transition-all duration-300 transform hover:scale-110"
               style={{ transitionDelay: isOpen ? `${index * 50}ms` : '0ms' }}
             >
@@ -104,7 +108,7 @@ export default function Navbar() {
           ))}
           <a 
             href="#contact" 
-            onClick={() => setIsOpen(false)}
+            onClick={(e) => handleNavClick(e, '#contact')}
             className="border-2 border-primary-text bg-primary-text text-primary-bg px-8 py-4 text-xl font-black uppercase tracking-widest mt-8 w-full transition-transform transform active:scale-95 text-center"
             style={{ transitionDelay: isOpen ? `${navLinks.length * 50}ms` : '0ms' }}
           >

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUp, Code2, MessageCircle, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { services } from '../data/services';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -38,11 +39,11 @@ export default function Footer() {
           <div>
             <h4 className="text-primary-text font-bold uppercase tracking-widest text-sm mb-6">Navigation</h4>
             <ul className="space-y-4">
-              <li><a href="#about" className="text-primary-faint hover:text-primary-text transition-colors text-sm">About Us</a></li>
-              <li><a href="#services" className="text-primary-faint hover:text-primary-text transition-colors text-sm">Services</a></li>
-              <li><a href="#process" className="text-primary-faint hover:text-primary-text transition-colors text-sm">Our Process</a></li>
-              <li><a href="#projects" className="text-primary-faint hover:text-primary-text transition-colors text-sm">Selected Work</a></li>
-              <li><a href="#team" className="text-primary-faint hover:text-primary-text transition-colors text-sm">Team</a></li>
+              <li><a href="/#about" className="text-primary-faint hover:text-primary-text transition-colors text-sm">About Us</a></li>
+              <li><a href="/#services" className="text-primary-faint hover:text-primary-text transition-colors text-sm">Services</a></li>
+              <li><a href="/#process" className="text-primary-faint hover:text-primary-text transition-colors text-sm">Our Process</a></li>
+              <li><a href="/#projects" className="text-primary-faint hover:text-primary-text transition-colors text-sm">Selected Work</a></li>
+              <li><a href="/#team" className="text-primary-faint hover:text-primary-text transition-colors text-sm">Team</a></li>
             </ul>
           </div>
 
@@ -50,12 +51,13 @@ export default function Footer() {
           <div>
             <h4 className="text-primary-text font-bold uppercase tracking-widest text-sm mb-6">Services</h4>
             <ul className="space-y-4">
-              <li><a href="#services" className="text-primary-faint hover:text-primary-text transition-colors text-sm">Web Development</a></li>
-              <li><a href="#services" className="text-primary-faint hover:text-primary-text transition-colors text-sm">App Development</a></li>
-              <li><a href="#services" className="text-primary-faint hover:text-primary-text transition-colors text-sm">UI/UX Design</a></li>
-              <li><a href="#services" className="text-primary-faint hover:text-primary-text transition-colors text-sm">Cloud Solutions</a></li>
-              <li><a href="#services" className="text-primary-faint hover:text-primary-text transition-colors text-sm">DevOps & CI/CD</a></li>
-              <li><a href="#services" className="text-primary-faint hover:text-primary-text transition-colors text-sm">API Development</a></li>
+              {services.map((service) => (
+                <li key={service.id}>
+                  <Link to={`/service/${service.id}`} className="text-primary-faint hover:text-primary-text transition-colors text-sm">
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
