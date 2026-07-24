@@ -6,15 +6,13 @@ thumbnail: /src/assets/images/image-2.jpg
 
 # AI Isn't Stealing Your Tech Job—It's Forcing You to Evolve
 
-![Hero Image showing a futuristic workspace or AI concept](https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg)
-
 If you spend enough time scrolling through tech forums or LinkedIn feeds, you might think the sky is falling. Between headlines of tech layoffs and the explosive capabilities of generative AI, the narrative is loud and clear: \*AI is coming for our jobs.\* 
 
 But let's take a collective breath and look at the reality on the ground. Artificial intelligence isn't initiating the death of the tech industry; it is driving its next massive evolution. Just as high-level programming languages didn't eliminate the need for software engineers, AI isn't here to replace human techies. It is here to change what we do and how we do it. 
 
 Here is a breakdown of how AI is actually impacting the tech job market and what it means for your career.
 
----
+***
 
 ## The Automation of the Mundane
 
@@ -57,9 +55,7 @@ We are already seeing a surge in demand for highly specialized, AI-driven roles:
 The worst thing you can do right now is bury your head in the sand. To ensure you stay competitive in an AI-driven job market, you need to adapt your skillset.
 
 1. \*\*Embrace the Tools:\*\* Don't fight AI; use it. Start integrating AI assistants into your daily workflow. The engineers who get replaced won't be replaced by AI—they will be replaced by engineers who know how to use AI. 
-
 2. \*\*Double Down on Soft Skills:\*\* AI cannot replicate human empathy, leadership, or nuanced communication. The ability to bridge the gap between deeply technical concepts and non-technical stakeholders will make you indispensable.
-
 3. \*\*Cultivate AI Literacy:\*\* You don't need a PhD in machine learning, but you do need to understand how AI models work, their limitations, and their security vulnerabilities. 
 
 ## The Bottom Line
