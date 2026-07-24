@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import Hero from '../components/sections/Hero.jsx';
+import LogoTicker from '../components/ui/LogoTicker.jsx';
+import About from '../components/sections/About.jsx';
+import Stats from '../components/sections/Stats.jsx';
+import Services from '../components/sections/Services.jsx';
+import Process from '../components/sections/Process.jsx';
+import Projects from '../components/sections/Projects.jsx';
+import Blogs from '../components/sections/Blogs.jsx';
+import Team from '../components/sections/Team.jsx';
+import Testimonials from '../components/sections/Testimonials.jsx';
+import TechStack from '../components/sections/TechStack.jsx';
+import CtaSection from '../components/sections/CtaSection.jsx';
+import Contact from '../components/sections/Contact.jsx';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout>
+  <Hero client:load />
+  <LogoTicker client:load />
+  <About client:load />
+  <Stats client:load />
+  <Services client:load />
+  <Process client:load />
+  <Projects client:load />
+  <Blogs client:load posts={sortedPosts} />
+  <Team client:load />
+  <Testimonials client:load />
+  <TechStack client:load />
+  <CtaSection client:load />
+  <Contact client:load />
+</Layout>

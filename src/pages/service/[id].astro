@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceDetail from '../../components/sections/ServiceDetail.jsx';
+import { services } from '../../data/services.js';
+
+export function getStaticPaths() {
+  return services.map(service => ({
+    params: { id: service.id }
+  }));
+}
+
+const { id } = Astro.params;
+---
+
+<Layout>
+  <ServiceDetail id={id} client:load />
+</Layout>

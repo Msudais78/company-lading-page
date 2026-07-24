@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CaseStudy from '../../components/sections/CaseStudy.jsx';
+import { projects } from '../../data/projects.js';
+
+export function getStaticPaths() {
+  return projects.map(project => ({
+    params: { id: project.id }
+  }));
+}
+
+const { id } = Astro.params;
+---
+
+<Layout>
+  <CaseStudy id={id} client:load />
+</Layout>

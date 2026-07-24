@@ -1,0 +1,88 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { Calendar, ArrowLeft } from 'lucide-react';
+import Reveal from '../../components/ui/Reveal.jsx';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const dateStr = new Date(entry.data.date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<Layout>
+  <article class="pt-32 pb-24 lg:pt-40 lg:pb-32 bg-primary-bg min-h-screen">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Reveal direction="down" client:load>
+        <a href="/" class="inline-flex items-center gap-2 text-primary-faint hover:text-primary-text transition-colors mb-12 font-mono text-sm uppercase tracking-widest">
+          <ArrowLeft class="w-4 h-4" />
+          Back to Home
+        </a>
+      </Reveal>
+
+      <header class="mb-16">
+        <Reveal direction="up" client:load>
+          <div class="flex items-center gap-3 text-primary-muted font-mono text-sm uppercase tracking-widest mb-6">
+            <Calendar class="w-4 h-4" />
+            <time datetime={entry.data.date.toISOString()}>{dateStr}</time>
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-text tracking-tight mb-8 leading-tight">
+            {entry.data.title}
+          </h1>
+        </Reveal>
+      </header>
+    </div>
+
+    {entry.data.thumbnail && (
+      <Reveal direction="up" delay={200} client:load>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+          <div class="aspect-[21/9] overflow-hidden rounded-sm w-full">
+            <img 
+              src={entry.data.thumbnail} 
+              alt={entry.data.title} 
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </Reveal>
+    )}
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Reveal direction="up" delay={300} client:load>
+        <div class="prose prose-invert prose-lg max-w-none 
+          prose-headings:text-primary-text prose-headings:font-bold prose-headings:tracking-tight
+          prose-p:text-primary-muted prose-p:leading-relaxed
+          prose-a:text-primary-text prose-a:underline prose-a:underline-offset-4 hover:prose-a:text-primary-muted
+          prose-strong:text-primary-text
+          prose-ul:text-primary-muted prose-ol:text-primary-muted
+          prose-blockquote:border-l-primary-border-hover prose-blockquote:text-primary-faint prose-blockquote:font-mono prose-blockquote:not-italic
+          prose-img:rounded-sm">
+          <Content />
+        </div>
+      </Reveal>
+    </div>
+  </article>
+</Layout>
+
+<style is:global>
+  /* Basic markdown styling fallback if typography plugin is missing */
+  .prose h1, .prose h2, .prose h3, .prose h4 { margin-top: 2em; margin-bottom: 1em; color: var(--color-primary-text); font-weight: 700; }
+  .prose h2 { font-size: 1.875rem; }
+  .prose h3 { font-size: 1.5rem; }
+  .prose p, .prose ul, .prose ol { margin-bottom: 1.5em; color: var(--color-primary-muted); line-height: 1.8; }
+  .prose ul { list-style-type: disc; padding-left: 1.5em; }
+  .prose blockquote { border-left: 4px solid #333; padding-left: 1em; margin-left: 0; font-style: italic; color: #888; }
+  .prose strong { color: var(--color-primary-text); font-weight: 700; }
+</style>

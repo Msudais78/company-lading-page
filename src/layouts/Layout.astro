@@ -1,0 +1,34 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import Navbar from '../components/sections/Navbar.jsx';
+import Footer from '../components/sections/Footer.jsx';
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="BraxSystems - Full-stack digital engineering" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>BraxSystems</title>
+    <ClientRouter />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-primary-bg text-primary-text font-sans antialiased overflow-x-hidden selection:bg-primary-text selection:text-primary-bg min-h-screen flex flex-col relative">
+    <div class="fixed inset-0 pointer-events-none">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div class="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary-text opacity-[0.03] blur-[100px]"></div>
+    </div>
+    
+    <div class="relative z-10 flex flex-col min-h-screen">
+      <Navbar client:load />
+      <main class="flex-grow">
+        <slot />
+      </main>
+      <Footer client:load />
+    </div>
+  </body>
+</html>
