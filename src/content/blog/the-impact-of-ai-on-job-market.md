@@ -1,5 +1,6 @@
 ---
 title: The Impact of AI on Job market
+excerpt: ''
 date: 2026-07-24T15:48
 thumbnail: /src/assets/images/image-2.jpg
 ---
